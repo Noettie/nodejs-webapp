@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing app dependencies...
+      - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl   
+      - chmod +x ./kubectl
+      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+      - source ~/.bashrc
+      - echo 'Check kubectl version'
+      - kubectl version --short --client
+    
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 335871625378.dkr.ecr.eu-west-2.amazonaws.com
+      - IMAGE_REPO_NAME=335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejswebapp
+      - IMAGE_TAG=latest
+      - aws eks --region eu-west-2 update-kubeconfig --name k8s-boy
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+ 
+
+      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Push the latest image to cluster
+      - kubectl apply -f deployment.yml
