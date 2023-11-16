@@ -16,7 +16,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 732550944929.dkr.ecr.us-east-2.amazonaws.com
-      - IMAGE_REPO_NAME=732550944929.dkr.ecr.us-east-2.amazonaws.com/nodejswebapp
+      - IMAGE_REPO_NAME=nodejswebapp
       - IMAGE_TAG=latest
       - aws eks --region us-east-2 update-kubeconfig --name nottie-k8s
   build:
