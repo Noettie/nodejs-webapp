@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN yarn install --ignore-engines
+RUN npm install 
 
 COPY . .
 
