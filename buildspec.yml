@@ -15,10 +15,10 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 335871625378.dkr.ecr.eu-west-2.amazonaws.com
-      - IMAGE_REPO_NAME=335871625378.dkr.ecr.eu-west-2.amazonaws.com/nodejswebapp
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 732550944929.dkr.ecr.us-east-2.amazonaws.com
+      - IMAGE_REPO_NAME=732550944929.dkr.ecr.us-east-2.amazonaws.com/nodejswebapp
       - IMAGE_TAG=latest
-      - aws eks --region eu-west-2 update-kubeconfig --name k8s-boy
+      - aws eks --region eu-west-2 update-kubeconfig --name nottie-k8s
   build:
     commands:
       - echo Build started on `date`
