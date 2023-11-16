@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nodesy-container
-          image: nottieacr.azurecr.io/nodejs-webapp:v1
+          image: nottieacr.azurecr.io/nodejswebapp:latest
           ports:
             - containerPort: 3000
 
