@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --recursive --timeout 60000 --exit",
-    "start": "start": "node_modules/nodescripts/bin/nodescripts.js start"
+    "start": "node_modules/nodescripts/bin/nodescripts.js start"
   },
   "author": "Nothando Ndlovu thandonoe.ndlovu@gmail.com",
   "license": "MIT",
